@@ -27,10 +27,12 @@ end
 %% fit
 [fitparm, ~, ~, fitoutput] = ...
     fminsearch('expfalltwo_pb_mxl',inargzero,[],dwellts,pwr,tm,tx)
+fitparm_recip = 1 ./ fitparm
 %% plot pdfs
 % generate fit curves
 delta_t = max(dwellts)/1000.;
 t=0:delta_t:max(dwellts);
+clear p;
 for n = 1:npwr
     p(n,:) = expfalltwo_pb_pdf(fitparm, t, pwrs(n), tm, tx);
 end
@@ -48,28 +50,24 @@ title ('PDFs of data and fit');
 xlabel ('dwell time (s)');
 ylabel ('pdf (s^{-1})'); 
 
-% %% bootstrap
-% boot_results = zeros(nboot, 1);
-% nontrunc = logical([ones(length(dwellts), 1); zeros(length(obsts), 1)]);
-% for n = 1:nboot
-% %     % fixed numbers of truncated/non-trucated
-% %     boot_dwells = dwellts(randi(length(dwellts), length(dwellts), 1));
-% %     boot_obsts = obsts(randi(length(obsts), length(obsts), 1));
-% %     boot_results(n) = ...
-% %         fit_finite_dwells(boot_dwells,boot_obsts, tau, tm, recl);
-% 
-% % random umbers of truncated/non-truc
-% indices = randi(length(allts), length(allts), 1);
-% sel = allts(indices);
-% clear boot_dwells 
-% clear boot_obs
-% boot_dwells = sel(nontrunc(indices));
-% boot_obsts = sel(~nontrunc(indices));
-% boot_results(n) = ... 
-%     fminsearch('flat_exp1_mxlall2', tau, [], ...
-%     boot_dwells,boot_obsts,tm, recl);
-% end
-% 
+%% bootstrap
+boot_results = zeros(nboot, length(fitparm));
+boot_dwells = zeros(length(dwellts),1);
+for n = 1:nboot
+% sample each power setting separately
+    for i = 1:npwr
+        locs = (pwr == pwrs(i));
+        one_power = dwellts(locs);
+        boot_dwells(locs) = one_power(randi(length(one_power), length(one_power), 1));
+    end
+    boot_results(n,:) = ... 
+    fminsearch('expfalltwo_pb_mxl',fitparm,optimset('MaxFunEvals', 4000),boot_dwells,pwr,tm,tx);
+end
+% parameter statistics
+boot_mean = mean(boot_results)
+boot_std = std(boot_results)
+boot_mean_recip = mean(1 ./ boot_results)
+boot_std_recip = std(1 ./ boot_results)
 % %% calculate c.i.s and plot fit bootstraps
 % l_ci = prctile(boot_results, 2.5);
 % u_ci = prctile(boot_results, 97.5);

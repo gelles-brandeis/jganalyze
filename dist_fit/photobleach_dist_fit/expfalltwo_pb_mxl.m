@@ -12,7 +12,7 @@ function pc=expfalltwo_pb_mxl(inarg,dwellts,pwr,tm,tx)
 %       tau1    ACTUAL taus that do not include photobleaching
 %       tau2 
 %       c]      proportionality constant that relates power to photobleaching
-%               lifetime (units = s/uW)
+%               lifetime (c * power = 1 / pb lifetime)
 %   dwellts (vector) - list of durations of dwells 
 %   pwr (vector) = exsposure values (laser power or frac duration) for each dwell
 %   tm - shortest dwell detectable 
@@ -25,8 +25,10 @@ a=1/(1+inarg(1)^2);
 % taus below are the APPARENT taus that include the effect of
 % photobleaching
 c=inarg(4);
-tau1 = 1 ./ (1 ./ abs(inarg(2)) + 1 ./ abs(c .* pwr));
-tau2 = 1 ./ (1 ./ abs(inarg(3)) + 1 ./ abs(c .* pwr));
+tau1 = 1 ./ (1 ./ abs(inarg(2)) + abs(c .* pwr));
+tau2 = 1 ./ (1 ./ abs(inarg(3)) + abs(c .* pwr));
+% tau1 = 1 ./ (1 ./ inarg(2) + (c .* pwr));
+% tau2 = 1 ./ (1 ./ inarg(3) + (c .* pwr));
 probability_vector = ...
     (  1./( a.*(exp(-tm./tau1)-exp(-tx./tau1)) + (1-a).*(exp(-tm./tau2)-exp(-tx./tau2)) )  ).*...
                                  ( a./tau1.*exp(-dwellts./tau1)+(1-a)./tau2.*exp(-dwellts./tau2) );
