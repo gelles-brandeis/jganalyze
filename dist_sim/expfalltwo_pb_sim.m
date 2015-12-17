@@ -12,9 +12,9 @@ function dwellts=expfalltwo_pb_sim(ap, tau1, tau2, pb_tau, n)
 %  pb_tau  photobleaching time constant
 %  n       number of dwells to generate
 %%
-rawdwellts=expfalltwo_sim(ap, tau1, tau2, n)
-pbts = random('exp',pb_tau,[n, 1])
-dwellts=min(rawdwellts,pbts)
+rawdwellts=expfalltwo_sim(ap, tau1, tau2, n);
+pbts = random('exp',pb_tau,[n, 1]);
+dwellts=min(rawdwellts,pbts);
 end
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
