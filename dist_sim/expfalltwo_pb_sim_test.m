@@ -8,7 +8,10 @@ tau2 = 10;
 pwrs = [.5, 1, 1.5, 2]; % laser power or exposure 
 pb_tau = 5; % photobleaching lifetime at power = 1
 %% parameters not used in this sim but needed for pb_dwell_fitplot_2exp
-inarg0 = 
+inargzero = 1.5 .* [ap, tau1, tau2, 1 ./ pb_tau];  % initial guesses
+tm = 0.5;   % tmin
+tx = 110;   % tmax
+nboot = 2000;
 %%
 pb_taus = pb_tau./pwrs;
 lbls = cell(length(pb_taus),1);
@@ -24,8 +27,8 @@ for i = 1:length(pb_taus)
     plot(bin_centers, y, '.-');
     hold on
     lbls{i} = strcat('Power = ',num2str(pwrs(i)));
-    dwellts = [dwellts, ts];
-    pwr = [pwr, pwrs(i) * ones(length(ts))];
+    dwellts = [dwellts; ts];
+    pwr = [pwr; pwrs(i) * ones(length(ts),1)];
 end
 xlabel('Time (s)')
 ylabel('Probability density (s^-^1)')
