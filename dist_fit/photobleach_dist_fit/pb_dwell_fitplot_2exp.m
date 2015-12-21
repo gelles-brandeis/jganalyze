@@ -36,6 +36,7 @@ for n = 1:npwr
     p(n,:) = expfalltwo_pb_pdf(fitparm, t, pwrs(n), tm, tx);
 end
 % plot
+figure();
 orient('landscape');
 subplot(2,2,1);
 plot(bin_centers, dwell_pdf, '.', t, p, '-');
