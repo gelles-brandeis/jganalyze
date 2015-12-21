@@ -1,6 +1,9 @@
 % Script to calculate and plot dwell time distns/fits/bootstraps including
 % photobleaching
-%
+%%
+% Copyright 2014,2015 Jeff Gelles, Brandeis University.
+% This is licensed software; see notice at end of file.
+%%
 % Global variables used:
 %   dwellts - list of durations of dwells 
 %   pwr = exsposure values (laser power or frac duration) for each dwell
@@ -9,9 +12,6 @@
 %   tx - duration of experimental record
 %   nboot - number of bootstrap samples
 %   nbins - number of bins in pdf histograms
-%%
-% Copyright 2014,2015 Jeff Gelles, Brandeis University.
-% This is licensed software; see notice at end of file. 
 %% make experimental pdfs
 pwrs = unique(pwr); % list of powers
 npwr = length(pwrs);
@@ -23,7 +23,6 @@ for n = 2:npwr
     [~, dwell_pdf(n,:), bins] = binned_pdf...
             (dwellts(pwr == pwrs(n)), bins);
 end
-
 %% fit
 [fitparm, ~, ~, fitoutput] = ...
     fminsearch('expfalltwo_pb_mxl',inargzero,[],dwellts,pwr,tm,tx)
@@ -127,7 +126,7 @@ boot_std_recip = std(1 ./ boot_results)
 % terms of the GNU General Public License as published by the Free Software
 % Foundation, either version 3 of the License, or (at your option) any later
 % version.
-
+%
 % This software is distributed in the hope that it will be useful, but WITHOUT ANY
 % WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 % A PARTICULAR PURPOSE. See the GNU General Public License for more details.
