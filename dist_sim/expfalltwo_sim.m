@@ -1,18 +1,18 @@
-function dwellts=expfalltwo_sim(ap, tau1, tau2, n)
+function dwellts=expfalltwo_sim(a, tau1, tau2, n)
 % Generates dwell times drawn from a biexponential pdf 
 %% 
 % Copyright 2015 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 % Parameters:
-%  ap      amplitude fraction
+%  a      amplitude fraction
 %  tau1    time constants
 %  tau2 
 %  n       number of dwells to generate
 %%
 mus(1) = tau1;
 mus(2) = tau2;
-component=(rand(n,1) > ap) + 1;
+component=(rand(n,1) > a) + 1;
 dwellts=zeros(n,1);
 for i = 1:n
     dwellts(i) = random('exp',mus(component(i)));

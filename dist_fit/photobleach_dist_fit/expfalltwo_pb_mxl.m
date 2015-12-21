@@ -8,7 +8,8 @@ function pc=expfalltwo_pb_mxl(inarg,dwellts,pwr,tm,tx)
 %%
 % Parameters:
 %   inarg (vector) - fitting parameters vector:
-%      [ap      note that a = 1/(1+ap^2)
+%      [ap      note that the fractional amplitude of the first component is
+%               a = 1/(1+ap^2)
 %       tau1    ACTUAL taus that do not include photobleaching
 %       tau2 
 %       c]      proportionality constant that relates power to photobleaching

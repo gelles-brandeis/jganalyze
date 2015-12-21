@@ -1,4 +1,4 @@
-function dwellts=expfalltwo_pb_sim(ap, tau1, tau2, pb_tau, n)
+function dwellts=expfalltwo_pb_sim(a, tau1, tau2, pb_tau, n)
 % Generates dwell times drawn from a biexponential pdf with exponential
 % photobleaching
 %% 
@@ -6,13 +6,13 @@ function dwellts=expfalltwo_pb_sim(ap, tau1, tau2, pb_tau, n)
 % This is licensed software; see notice at end of file. 
 %%
 % Parameters:
-%  ap      amplitude fraction
+%  a      amplitude fraction
 %  tau1    time constants
 %  tau2 
 %  pb_tau  photobleaching time constant
 %  n       number of dwells to generate
 %%
-rawdwellts=expfalltwo_sim(ap, tau1, tau2, n);
+rawdwellts=expfalltwo_sim(a, tau1, tau2, n);
 pbts = random('exp',pb_tau,[n, 1]);
 dwellts=min(rawdwellts,pbts);
 end

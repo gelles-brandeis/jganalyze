@@ -25,8 +25,7 @@ for n = 2:npwr
 end
 %% fit
 [fitparm, ~, ~, fitoutput] = ...
-    fminsearch('expfalltwo_pb_mxl',inargzero,[],dwellts,pwr,tm,tx)
-fitparm_recip = 1 ./ fitparm
+    fminsearch('expfalltwo_pb_mxl',inargzero,[],dwellts,pwr,tm,tx);
 %% plot pdfs
 % generate fit curves
 delta_t = max(dwellts)/1000.;
@@ -35,21 +34,26 @@ clear p;
 for n = 1:npwr
     p(n,:) = expfalltwo_pb_pdf(fitparm, t, pwrs(n), tm, tx);
 end
-% plot
-figure();
-orient('landscape');
-subplot(2,2,1);
-plot(bin_centers, dwell_pdf, '.', t, p, '-');
+% plots
 leg = cell(2 * npwr, 1);
 for n = 1:npwr
     leg{n} = ['data; power = ', num2str(pwrs(n))];
     leg{n+npwr} = ['fit; power = ', num2str(pwrs(n))];
 end
-legend (leg);
-title ('PDFs of data and fit');
-xlabel ('dwell time (s)');
-ylabel ('pdf (s^{-1})'); 
-
+figure();
+orient('landscape');
+for j = 1:2
+    subplot(2,2,j);
+    if j == 1
+        plot(bin_centers, dwell_pdf, '.', t, p, '-');
+    else    
+        semilogy(bin_centers, dwell_pdf, '.', t, p, '-');
+    end
+    legend (leg);
+    title ('PDFs of data and fit');
+    xlabel ('dwell time (s)');
+    ylabel ('pdf (s^{-1})');
+end
 %% bootstrap
 boot_results = zeros(nboot, length(fitparm));
 boot_dwells = zeros(length(dwellts),1);
@@ -63,11 +67,18 @@ for n = 1:nboot
     boot_results(n,:) = ... 
     fminsearch('expfalltwo_pb_mxl',fitparm,optimset('MaxFunEvals', 4000),boot_dwells,pwr,tm,tx);
 end
+% concert parameters into the ones we want:
+%   ap --> amplitude fraction a:
+fitparm(1) = 1 ./ (fitparm(1)^2 + 1);
+boot_results(:,1) = 1 ./ (boot_results(:,1)^2 + 1);
+%   c --> photobleaching lifetime at power 1
+fitparm(4)
 % parameter statistics
-boot_mean = mean(boot_results)
-boot_std = std(boot_results)
-boot_mean_recip = mean(1 ./ boot_results)
-boot_std_recip = std(1 ./ boot_results)
+boot_mean = mean(boot_results);
+boot_std = std(boot_results);
+
+% boot_mean_recip = mean(1 ./ boot_results)
+% boot_std_recip = std(1 ./ boot_results)
 % %% calculate c.i.s and plot fit bootstraps
 % l_ci = prctile(boot_results, 2.5);
 % u_ci = prctile(boot_results, 97.5);

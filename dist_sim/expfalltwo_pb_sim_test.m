@@ -6,7 +6,7 @@
 %% parameters
 n = 2500; % number of dwells to sim at each power
 nbins = 15; %number of histogram bins
-ap = 0.5;
+a = 0.5;
 tau1 = 1; 
 tau2 = 30;
 pwrs = [0.25, 1, 4, 16]; % laser power or exposure 
@@ -14,7 +14,9 @@ pb_tau = 10; % photobleaching lifetime at power = 1
 tm = 0.1;   % tmin
 tx = 200;   % tmax
 %% parameters not used in this sim but needed for pb_dwell_fitplot_2exp
-inargzero = 1.5 .* [ap, tau1, tau2, 1 ./ pb_tau];  % initial guesses
+ap = sqrt(1 ./ a - 1);
+inargzero = 1.5 .* [ap, tau1, tau2, 1 ./ pb_tau];  % initial guesses 
+%                               deliberately off by a factor of 1.5
 nboot = 20;
 %% simulate
 pb_taus = pb_tau./pwrs; %actual photobleaching lifetimes
@@ -24,7 +26,7 @@ pwr = [];
 figure();
 orient('landscape');
 for i = 1:length(pb_taus)
-    ts=expfalltwo_pb_sim(ap, tau1, tau2, pb_taus(i), n);
+    ts=expfalltwo_pb_sim(a, tau1, tau2, pb_taus(i), n);
     if i == 1 
         [bin_centers, y, bins] = binned_pdf(ts, nbins);
     else
