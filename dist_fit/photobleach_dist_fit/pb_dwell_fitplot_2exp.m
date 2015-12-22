@@ -72,18 +72,18 @@ end
 fitparm(1) = 1 ./ (fitparm(1).^2 + 1);
 boot_results(:,1) = 1 ./ (boot_results(:,1).^2 + 1);
 %   c --> photobleaching lifetime at power 1
-fitparm(4) = 1 ./ fitparm(4);
-boot_results(:,4) = 1 ./ boot_results(:,4);
+fitparm(5) = 1 ./ fitparm(4);
+boot_results(:,5) = 1 ./ boot_results(:,4);
 % parameter statistics
 boot_mean = mean(boot_results);
 boot_std = std(boot_results);
 % compile results
 pnames = {'fractional amplitude'; 'tau1'; 'tau2'; ...
-    'pb lifetime at pwr=1'};
-outstr = cell(5, 1);
+    'pb r.c. at pwr=1'; 'pb lifetime at pwr=1'};
+outstr = cell(6, 1);
 outstr{1} = sprintf('%-28s %-14s %-14s %-14s', ' ', ...
     'Fit', 'Boot mean', 'Boot std');
-for j = 1:4
+for j = 1:5
     outstr{j+1} = sprintf('%-28s %-14.4g %-14.4g %-14.4g',...
         pnames{j}, fitparm(j), boot_mean(j), boot_std(j));
 end
