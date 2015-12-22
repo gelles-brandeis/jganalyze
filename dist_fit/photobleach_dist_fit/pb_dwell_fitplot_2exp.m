@@ -69,14 +69,32 @@ for n = 1:nboot
 end
 % concert parameters into the ones we want:
 %   ap --> amplitude fraction a:
-fitparm(1) = 1 ./ (fitparm(1)^2 + 1);
-boot_results(:,1) = 1 ./ (boot_results(:,1)^2 + 1);
+fitparm(1) = 1 ./ (fitparm(1).^2 + 1);
+boot_results(:,1) = 1 ./ (boot_results(:,1).^2 + 1);
 %   c --> photobleaching lifetime at power 1
-fitparm(4)
+fitparm(4) = 1 ./ fitparm(4);
+boot_results(:,4) = 1 ./ boot_results(:,4);
 % parameter statistics
 boot_mean = mean(boot_results);
 boot_std = std(boot_results);
-
+% compile results
+pnames = {'fractional amplitude'; 'tau1'; 'tau2'; ...
+    'pb lifetime at pwr=1'};
+outstr = cell(5, 1);
+outstr{1} = sprintf('%-28s %-14s %-14s %-14s', ' ', ...
+    'Fit', 'Boot mean', 'Boot std');
+for j = 1:4
+    outstr{j+1} = sprintf('%-28s %-14.4g %-14.4g %-14.4g',...
+        pnames{j}, fitparm(j), boot_mean(j), boot_std(j));
+end
+%print
+subplot(2,2,3);
+ax=gca;
+ax.Color='none';
+ax.XAxis.Color='none';
+ax.YAxis.Color='none';
+annotation('textbox', 'String', outstr, 'FitBoxToText', 'on',...
+    'FontName', 'FixedWidth');
 % boot_mean_recip = mean(1 ./ boot_results)
 % boot_std_recip = std(1 ./ boot_results)
 % %% calculate c.i.s and plot fit bootstraps

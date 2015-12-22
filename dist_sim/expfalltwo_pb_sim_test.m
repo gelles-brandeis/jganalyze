@@ -4,6 +4,7 @@
 % Copyright 2014,2015 Jeff Gelles, Brandeis University.
 % This is licensed software; see notice at end of file.
 %% parameters
+run = 'Run 3';
 n = 2500; % number of dwells to sim at each power
 nbins = 15; %number of histogram bins
 a = 0.5;
@@ -54,10 +55,11 @@ ax=gca;
 ax.Color='none';
 ax.XAxis.Color='none';
 ax.YAxis.Color='none';
-show_vars({'n'; 'ap'; 'tau1'; 'tau2'; 'pb_tau'; 'tm'; 'tx'});
+show_vars({'run'; 'n'; 'ap'; 'tau1'; 'tau2'; 'pb_tau'; 'tm'; 'tx'});
 hold off
 %% versions
 % ver 2: make output suitable for pb_dwell_fitplot_2exp
+% ver 3: updated to properly handle a/ap
 %% Notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
