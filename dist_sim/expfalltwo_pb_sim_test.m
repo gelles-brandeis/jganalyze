@@ -4,7 +4,7 @@
 % Copyright 2014,2015 Jeff Gelles, Brandeis University.
 % This is licensed software; see notice at end of file.
 %% parameters
-run = 'Run 3';
+run = 'Run 4 reduced tmax';
 n = 2500; % number of dwells to sim at each power
 nbins = 15; %number of histogram bins
 a = 0.5;
@@ -13,7 +13,7 @@ tau2 = 30;
 pwrs = [0.25, 1, 4, 16]; % laser power or exposure 
 pb_tau = 10; % photobleaching lifetime at power = 1
 tm = 0.1;   % tmin
-tx = 200;   % tmax
+tx = 30;   % tmax
 %% parameters not used in this sim but needed for pb_dwell_fitplot_2exp
 ap = sqrt(1 ./ a - 1);
 inargzero = 1.5 .* [ap, tau1, tau2, 1 ./ pb_tau];  % initial guesses 
