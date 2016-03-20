@@ -40,7 +40,7 @@ end
 %% versions
 % ver 2
 % - make sure bins are unique
-% ver 3
+% ver 3 3/20/16
 % - calculate binomial s.e. for each bin
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
