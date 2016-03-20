@@ -1,4 +1,4 @@
-function [bin_centers, y, bins] = binned_pdf(x, nbins)
+function [bin_centers, y, bins, se] = binned_pdf(x, nbins)
 % constructs a binned pdf of vector x suitable for plotting
 %
 % if nbins is a scalar, program constructs nbins equally populated bins and
@@ -11,8 +11,11 @@ function [bin_centers, y, bins] = binned_pdf(x, nbins)
 %
 % y is the population in each bin
 %
+% se is the binomial standard error for each bin
+%
+% typical usage of results: errorbar(bin_centers, y, se)
 %%
-% Copyright 2014 Jeff Gelles, Brandeis University.
+% Copyright 2014, 2016 Jeff Gelles, Brandeis University.
 % This is licensed software; see notice at end of file. 
 %%
 if length(nbins) < 2
@@ -28,12 +31,17 @@ else
     y1 = zeros(n,1); % histc doesn't handle "no data" inputs gracefully
 end
 y = y1(1:end-1);
+p = y ./ n;
+q = 1 - p;
+se = sqrt(p .* q ./ n)./ diff(bins)'; % binomial s.e.
 y = y ./ diff(bins)' ./ n;  % calculate pdf
 bin_centers = bins(1:end-1) + diff(bins) ./ 2;
 end
 %% versions
 % ver 2
 % - make sure bins are unique
+% ver 3
+% - calculate binomial s.e. for each bin
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
