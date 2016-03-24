@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of finite_dwell_plot4</title>
+  <meta name="keywords" content="finite_dwell_plot4">
+  <meta name="description" content="Script to calculate and plot finite-record dwells, fits, and bootstraps">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../../index.html">Home</a> &gt;  <a href="../../index.html">jganalyze</a> &gt; <a href="#">dist_fit</a> &gt; <a href="index.html">censored_dist_fit</a> &gt; finite_dwell_plot4.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../../index.html"><img alt="<" border="0" src="../../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for jganalyze\dist_fit\censored_dist_fit&nbsp;<img alt=">" border="0" src="../../../right.png"></a></td></tr></table>-->
+
+<h1>finite_dwell_plot4
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>Script to calculate and plot finite-record dwells, fits, and bootstraps</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Script to calculate and plot finite-record dwells, fits, and bootstraps
+
+ Global variables used:
+   dwellts - list of durations of dwells observed to their end
+   dwell_rec - time from start of each of the above dwells to the end of
+   the recording
+   obsts - list of durations of dwells terminated by end of record
+   inargzero - vector of parameter initial guesses 
+   tm - shortest dwell detectable (not used)
+   recl - duration of experimental record
+   nboot - number of bootstrap samples
+   nbins - number of bins in pdf histograms
+%
+ Copyright 2014 Jeff Gelles, Brandeis University.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+<li><a href="flat_exp1_exptlpdf.html" class="code" title="function [pa, pn, pt] = flat_exp1_exptlpdf(t, tau, recl)">flat_exp1_exptlpdf</a>	PDF: single exponential, finite-length record, flat start dist</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+<li><a href="distfitscript2.html" class="code" title="">distfitscript2</a>	</li></ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Thu 24-Mar-2016 10:06:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

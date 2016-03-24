@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of subplot_coords</title>
+  <meta name="keywords" content="subplot_coords">
+  <meta name="description" content="Calculates the fractional coordinates of a subplot bounding box">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../../index.html">Home</a> &gt;  <a href="../../index.html">jganalyze</a> &gt; <a href="#">plot</a> &gt; <a href="index.html">plot_annotate</a> &gt; subplot_coords.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../../index.html"><img alt="<" border="0" src="../../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for jganalyze\plot\plot_annotate&nbsp;<img alt=">" border="0" src="../../../right.png"></a></td></tr></table>-->
+
+<h1>subplot_coords
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>Calculates the fractional coordinates of a subplot bounding box</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>function [x1, y1, x2, y2] = subplot_coords(subplot_params) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Calculates the fractional coordinates of a subplot bounding box
+
+ Input:
+ subplot_params: a three-element vector having the same elements as the
+ arguments of subplot().  Example: the same are of the figure that is
+ referenced by
+       subplot (2,2,3) and subplot_coords ([2 2 3])
+ 
+ Output:
+ Fractional coordinates of the lower left (x1,y1) and upper right (x2,y2)
+ of the subplot area given that (0,0) is the lower left and (1,1) the
+ upper right of the figure.
+%
+ Copyright 2014,2015 Jeff Gelles, Brandeis University.
+ This is licensed software; see notice at end of file.
+%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+<li><a href="show_vars.html" class="code" title="function [strings] = show_vars(vlist, loc)">show_vars</a>	SHOW_VARS Places a text box in the current figure that displays variable</li></ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Thu 24-Mar-2016 10:06:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
