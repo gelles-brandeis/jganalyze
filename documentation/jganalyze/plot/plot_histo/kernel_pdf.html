@@ -24,7 +24,7 @@
 <div class="box"><strong>constructs a normal kernel pdf of vector dwells suitable for plotting</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
-<div class="box"><strong>function [yi, l_ci, u_ci] = kernel_pdf(dwells, plot_x, nboot, ci) </strong></div>
+<div class="box"><strong>function [yi, l_ci, u_ci] = kernel_pdf(dwells, plot_x, nboot, ci, all_pos) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> constructs a normal kernel pdf of vector dwells suitable for plotting
@@ -33,6 +33,7 @@
  plot_x - values along x-axis of hist at which to compute histo
  nboot - number of bootstrap evaluations for c.i. calc; 0 = don't calc c.i.
  confidence interval width 0 &lt; ci &lt; 100
+ all_pos - if true (default) all dwells are postitive (the usual case!)
 
  yi - histo values
 %
@@ -53,6 +54,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Thu 24-Mar-2016 10:06:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Thu 14-Apr-2016 16:02:02 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>
