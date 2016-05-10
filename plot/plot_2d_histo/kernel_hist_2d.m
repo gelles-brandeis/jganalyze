@@ -25,6 +25,10 @@ mu1(1,1,:) = x(:,1); mu1 = repmat(mu1,[m1,m2,1]);
 mu2(1,1,:) = x(:,2); mu2 = repmat(mu2,[m1,m2,1]);
 f = sum((normpdf(x1,mu1,bw(1)) .* normpdf(x2,mu2,bw(2))), 3) ./ n .* cellarea;
 intgl = sum(sum(f));
+%% versions
+% ver 1 - 5/9/16 JG
+% TODO:  add code to fold histograms at upper and lower physical limits of 
+% data distributions
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
