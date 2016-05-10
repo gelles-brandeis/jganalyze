@@ -4,5 +4,6 @@
 % this script assumes m2html is installed at:
 addpath('C:\Users\gelles\Documents\MATLAB\m2html')
 cd ('C:\Users\gelles\Documents\GitHub')
+warning('off')
 m2html('mfiles','jganalyze', 'htmldir','jganalyze/documentation', ...
     'recursive','on', 'source', 'off', 'ignoredDir', 'documentation');
