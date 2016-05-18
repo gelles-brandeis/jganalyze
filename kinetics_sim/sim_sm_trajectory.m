@@ -41,7 +41,7 @@ for n = 1:max_length
         i = sum(cumsum(model.k(i,:) ./ sum_k)<rand())+1; % next state
     else
     % end trajectory if in a dead-end state
-        traj.duration(n) = 0 % by definition
+        traj.duration(n) = 0; % by definition
         break
     end
 end
