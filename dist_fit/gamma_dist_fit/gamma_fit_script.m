@@ -14,8 +14,8 @@ plot_y = pdf(pd,plot_x);
 [ci, bootstat] = bootci(nboot,{@gamma_fit, dwells},'alpha', 0.1,...
     'Options', statset('UseParallel', true));
 a_lower_90_ci = ci(1, 1);
-a_upper_90_ci = ci(1, 2);
-b_lower_90_ci = ci(2, 1);
+a_upper_90_ci = ci(2, 1);
+b_lower_90_ci = ci(1, 2);
 b_upper_90_ci = ci(2, 2);
 
 fig = figure();
