@@ -1,3 +1,4 @@
+% Example script illustrating the use of fitscript.m
 nbins=17; % number of bins in histograms
 nboot=10; % number of bootstrap samples
 global parm_names; % may not be necessary
