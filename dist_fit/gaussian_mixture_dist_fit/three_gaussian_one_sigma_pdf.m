@@ -18,7 +18,6 @@ distn=gmdistribution([parms(2);parms(5);parms(6)],covar,...
 y = pdf(distn,x);
 global parm_names
 parm_names= {'p1'; 'mu1'; 'sigma'; 'p2'; 'mu2'; 'mu3'; };
-<<<<<<< HEAD
 end
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
@@ -31,6 +30,4 @@ end
 % A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 % You should have received a copy of the GNU General Public License
 % along with this software. If not, see <http://www.gnu.org/licenses/>.
-=======
-end
->>>>>>> origin/master
+
