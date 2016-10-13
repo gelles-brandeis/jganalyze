@@ -1,5 +1,7 @@
-function gitInfo=getGitInfo()
+function gitInfo=getGitInfo(root)
 % https://www.mathworks.com/matlabcentral/fileexchange/32864-get-git-info
+% modified Jeff Gelles Nov. 2016
+%
 % Get information about the Git repository in the current directory, including: 
 %          - branch name of the current Git Repo 
 %          -Git SHA1 HASH of the most recent commit
@@ -15,7 +17,8 @@ function gitInfo=getGitInfo()
 % Note this uses only file information, it makes no external program 
 % calls at all. 
 %
-% This function must be in the base directory of the git repository
+% This function must be called from the base directory of the git repository
+% OR root must contain that directory with a trailing fileseparator
 %
 % Released under a BSD open source license. Based on a concept by Marc
 % Gershow.
@@ -56,9 +59,11 @@ function gitInfo=getGitInfo()
 % The views and conclusions contained in the software and documentation are those of the
 % authors and should not be interpreted as representing official policies, either expressed
 % or implied, of <copyright holder>.
-
+if nargin == 0
+    root = '';
+end
  gitInfo=[];
-if ~exist('.git','file') || ~exist('.git/HEAD','file')
+if ~exist([root '.git'],'file') || ~exist([root '.git/HEAD'],'file')
     %Git is not present
     return
 end
@@ -67,7 +72,7 @@ end
 
 %Read in the HEAD information, this will tell us the location of the file
 %containing the SHA1
-text=fileread('.git/HEAD');
+text=fileread([root '.git/HEAD']);
 parsed=textscan(text,'%s');
 
 if ~strcmp(parsed{1}{1},'ref:') || ~length(parsed{1})>1
@@ -85,13 +90,13 @@ gitInfo.branch=branchName;
 
 
 %Read in SHA1
-SHA1text=fileread(fullfile(['.git/' pathstr],[name ext]));
+SHA1text=fileread(fullfile([root '.git/' pathstr],[name ext]));
 SHA1=textscan(SHA1text,'%s');
 gitInfo.hash=SHA1{1}{1};
 
 
 %Read in config file
-config=fileread('.git/config');
+config=fileread([root '.git/config']);
 %Find everything space delimited
 temp=textscan(config,'%s','delimiter','\n');
 lines=temp{1};
