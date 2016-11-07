@@ -1,7 +1,7 @@
 function 
 % comment
 %% 
-% Copyright 2015 Jeff Gelles, Brandeis University 
+% Copyright 2016 Jeff Gelles, Brandeis University 
 % Modified from expfalltwo_mxl Copyright 2014 Larry Friedman, Brandeis
 % University
 % This is licensed software; see notice at end of file. 
