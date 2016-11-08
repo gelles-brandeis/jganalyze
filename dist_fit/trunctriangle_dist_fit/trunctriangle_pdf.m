@@ -3,8 +3,6 @@ function p = trunctriangle_pdf(args, x)
 % distribution
 %% 
 % Copyright 2016 Jeff Gelles, Brandeis University 
-% Modified from expfalltwo_mxl Copyright 2014 Larry Friedman, Brandeis
-% University
 % This is licensed software; see notice at end of file. 
 %%
 %   args(1:4) = a, b, c, d
