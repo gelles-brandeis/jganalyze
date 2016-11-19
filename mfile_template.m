@@ -7,7 +7,8 @@ function
 % This is licensed software; see notice at end of file. 
 %%
 % Parameters:
-%   
+%
+% From https://github.com/gelles-brandeis/jganalyze.git
 
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
@@ -20,3 +21,4 @@ function
 % A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 % You should have received a copy of the GNU General Public License
 % along with this software. If not, see <http://www.gnu.org/licenses/>.
+
