@@ -15,8 +15,12 @@ shading flat
 xlabel ('Time (s)')
 ylabel ('\itE\rm_{FRET}')
 c=colorbar;
-c.Label.String='Probability density (s^{-1})';
+c.Label.String='Probability density';
 end
+%% history
+% version 2 11/2216
+% Removed units of s-1 in colorbar scale since normally these graphs would only
+% be normalized on the EFRET axis, not on the time axis.
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
