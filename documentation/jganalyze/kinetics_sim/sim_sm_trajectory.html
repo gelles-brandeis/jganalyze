@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sim_sm_trajectory</title>
+  <meta name="keywords" content="sim_sm_trajectory">
+  <meta name="description" content="sim_sm_trajectory: produces a single reaction trajectory by Gillespie">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">jganalyze</a> &gt; <a href="index.html">kinetics_sim</a> &gt; sim_sm_trajectory.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for jganalyze\kinetics_sim&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>sim_sm_trajectory
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>sim_sm_trajectory: produces a single reaction trajectory by Gillespie</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function traj = sim_sm_trajectory(model, max_length) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> sim_sm_trajectory: produces a single reaction trajectory by Gillespie
+ simulation of a kinetic model.
+ 
+ Inputs:
+
+   model.states: column cell array with names of states
+   model.k: rate constant matrix; model.k(i,j) is the rate constant (in 
+       s-1 or min-1 for conversion of state i ==&gt; state j.  All diagonal
+       elements should be zero for a Markov process.  If model.k(i,:) is
+       all zeros, that defines state i as a dead end meaning that entry
+       into state i temrinates the trajectory.
+   model.start_prob: column vector; model.start_prob(i) is the probability
+       that a trajectory will start in state i. Elements must be
+       non-negative and sum to 1.
+
+   max_length: terminate the trajectory after this number of steps, if it
+       doesn't stop sooner.
+
+ Outputs:
+
+   traj.* are all column vectors of the same length describing the
+   trajectory
+       .no: state number
+       .name: state name
+       .duration: duration in the state
+       .time: cumulative time till the end of state.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="sim_sm_trajectory_test1.html" class="code" title="">sim_sm_trajectory_test1</a>	A <==> B --> C Test script for sim_sm_trajectory</li></ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Wed 23-Aug-2017 12:39:58 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
