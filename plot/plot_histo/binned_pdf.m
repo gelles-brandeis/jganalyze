@@ -1,4 +1,5 @@
 function [bin_centers, y, bins, se] = binned_pdf(x, nbins)
+% [bin_centers, y, bins, se] = binned_pdf(x, nbins)
 % constructs a binned pdf of vector x suitable for plotting
 %
 % if nbins is a scalar, program constructs nbins equally populated bins and
@@ -15,7 +16,7 @@ function [bin_centers, y, bins, se] = binned_pdf(x, nbins)
 %
 % typical usage of results: errorbar(bin_centers, y, se)
 %%
-% Copyright 2014, 2016 Jeff Gelles, Brandeis University.
+% Copyright 2014, 2016, 2018 Jeff Gelles, Brandeis University.
 % This is licensed software; see notice at end of file. 
 %%
 if length(nbins) < 2
