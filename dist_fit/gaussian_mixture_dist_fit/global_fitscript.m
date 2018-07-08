@@ -27,6 +27,8 @@ fitfun = @(b) mle(b,'pdf',func2,'start', init_parm, 'alpha', 0.1,...
     'MaxFunEvals', 10000));
 
 phat = fitfun(fit_data); % do the fit
+phatcell = num2cell(phat);
+log_likelihood = sum(log(func(fit_category, fit_data, nslice, phatcell{:})))
 init_parm = phat;
 
 % now bootstrap to get fit params confidence intervals
@@ -63,7 +65,6 @@ for i = 1:nslice
     fig = figure();
     orient('portrait');
     errorbar(bin_centers, y, se,'ob');
-    phatcell = num2cell(phat);
     bin_cat = ones(length(bin_centers'),1) * i;
     y2 = func(bin_cat, bin_centers',nslice, phatcell{:});
     hold on
@@ -77,7 +78,7 @@ for i = 1:nslice
         'Interpreter', 'none')
     savefig(fig,[run '_' condition_names{i}]);
     
-    two_gaussian_global_mus_sigma_compplot
+    plot_function();
 end
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
