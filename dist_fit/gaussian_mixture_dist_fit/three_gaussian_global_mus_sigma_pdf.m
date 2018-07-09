@@ -1,5 +1,5 @@
 function y = three_gaussian_global_mus_sigma_pdf(fit_category, fit_data, n_cdns, varargin)
-% y = three_gaussian_global_mus_sigma_pdf(fit_category, fit_data, <parms>)
+% y = three_gaussian_global_mus_sigma_pdf(fit_category, fit_data, n_cdns, <parms>)
 % pdf values for a three-component Gaussian mixture model with the same sigma
 % for each component and global mus over several "conditions", e.g., 
 % time slices of a kinetics experiment/mutants/concentrations
@@ -26,7 +26,7 @@ function y = three_gaussian_global_mus_sigma_pdf(fit_category, fit_data, n_cdns,
 %%
 if nargin ~= 3 + 2 * n_cdns + 4 % 3 (for fit_category, fit_data, n_cdns) plus 
                         % number of parameters
-    error('Function called with %d parameters; expecting %d'...
+    error('Function called with %d parameters; expecting %d.'...
         , nargin, 3 + 2 * n_cdns + 4);
 end
 parms = cell2mat(varargin); 
@@ -46,11 +46,17 @@ global condition_names
 
 y = ones(length(fit_data), 1); % for data points not in any category, pdf = 1
 for i = 1:n_cdns
-    distn = gmdistribution([mu1; mu2; mu3], covar,...
-        [parms(i); parms(ncdns + i); 1 - parms(i) - parms(ncdns + i)]);
+    amps = [parms(i); parms(n_cdns + i); 1 - parms(i) - parms(n_cdns + i)];
+    if sum((amps < 0) + (amps > 1)) > 0
+        parms
+        amps
+        error('Gaussian mixture model amplitude parameter out of range [0,1].')
+    end
+    distn = gmdistribution([mu1; mu2; mu3], covar, amps);
     index = (fit_category == i);
     y(index) = pdf(distn, fit_data(index));
     parm_names{i} = ['p1_' condition_names{i}];
+    parm_names{i + n_cdns} = ['p2_' condition_names{i}];
 end
 end
 %% notice
