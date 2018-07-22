@@ -21,7 +21,7 @@ function ebfret_viterbi_beadplot(analysis, nstates)
 out.analysis = analysis;
 figure()
 hold on
-trajectories=length(out.analysis(2).viterbi);
+trajectories=length(out.analysis(nstates).viterbi);
 for ist = 1:nstates
     x = [];
     y = [];
