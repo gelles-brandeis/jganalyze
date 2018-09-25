@@ -1,4 +1,4 @@
-function ebfret_viterbi_beadplot(analysis, nstates)
+function ebfret_viterbi_beadplot(analysis, nstates, sec_per_frame)
 % ebfret_viterbi_beadplot.m Makes "beadplot" ratergram of Viterbi output
 % from a ebfret analysis
 %% 
@@ -9,6 +9,8 @@ function ebfret_viterbi_beadplot(analysis, nstates)
 %
 % analysis -- analysis structure from ebfret
 % nstates -- number of states in analysis being plotted
+% sec_per_frame -- time interval between frames (if specified, horiz. axis
+%       of plot is time, if not specified it is frames
 %
 % Usage:
 %
@@ -18,6 +20,13 @@ function ebfret_viterbi_beadplot(analysis, nstates)
 %   ebfret_viterbi_beadplot(analysis,2)
 % From https://github.com/gelles-brandeis/jganalyze.git
 %%
+switch nargin
+    case 2
+        sec_per_frame = 1;
+    case 3
+    otherwise
+        error('Wrong number of arguments in ebfret_viterbi_beadplot')
+end
 out.analysis = analysis;
 figure()
 hold on
@@ -27,7 +36,7 @@ for ist = 1:nstates
     y = [];
     for itraj = 1:trajectories
       s=out.analysis(nstates).viterbi(itraj).state;
-      t = (1:length(s))';
+      t = (1:length(s))' .* sec_per_frame;
       idx = (s == ist);
       x = [x; t(idx)];
       y = [y; ones(sum(idx),1)*itraj];
@@ -36,8 +45,13 @@ for ist = 1:nstates
     leg{ist}=['State ', num2str(ist)];
 end
 legend(leg);
-xlabel('frame number')
-ylabel('trajectory number')
+switch nargin
+    case 2
+        xlabel('frame number');
+    otherwise
+        xlabel('time (s)')
+end
+ylabel('trajectory number');
 hold off   
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
