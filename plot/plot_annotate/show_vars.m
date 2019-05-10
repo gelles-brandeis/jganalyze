@@ -36,7 +36,7 @@ dim = [x1, y1, x2 - x1, y2 - y1];
 s = length(vlist);
 strings = cell(s, 1);
 for n = 1:s
-    if vlist{n}(1) == '%';
+    if vlist{n}(1) == '%'
         strings{n} = vlist{n}(2:end);
     else
 %       strings{n} = sprintf('%s = %4.4f',vlist{n},evalin('caller',char(vlist{n})));
