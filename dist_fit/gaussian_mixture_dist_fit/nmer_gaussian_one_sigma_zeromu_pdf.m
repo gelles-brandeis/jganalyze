@@ -1,22 +1,23 @@
-function y = nmer_gaussian_one_sigma_pdf(x, nmer, f, varargin)
+function y = nmer_gaussian_one_sigma_zeromu_pdf(x, nmer, f, varargin)
 % pdf values for a (nmer+1)-component Gaussian mixture model for fitting
 % intensity distributions from SMF data on a randomly labeled homomultimer
-% with one or zero dyes per protomer
+% with one or zero dyes per protomer.  This version of the function (with
+% "zeromu" in the name) assumes that the first Gaussian component is
+% centered at zero intensity (i.e., it is for background-subtracteed data).
 %
-% See nmer_gaussian_example.mlx for usage
+% See nmer_gaussian_zeromu_example.mlx for usage
 %
 % Requires statistics toolbox
 %
-% y = y = nmer_gaussian_one_sigma_pdf(x, varargin)
+% y = y = nmer_gaussian_one_sigma_zeromu_pdf(x, varargin)
 %
 % y - probability densities
 % x - input data
 % nmer -- multimer size (i.e., nmer = 6 for a hexamer)
 % f -- labeling probability for a protomer
-% parms - [xp0 mu0 sigma spacing] 
+% parms - [xp0 sigma spacing] 
 %   xp0 -- additional amplitude of zero peak: binomial amplitudes should be 
 %       divided by (xp0 + 1)
-%   mu0 -- position of zero peak
 %   sigma -- width of all peaks
 %   spacing -- spacing of peaks; peak 1 thru nmer are at mu0 + nmer *
 %       spacing
@@ -26,18 +27,18 @@ function y = nmer_gaussian_one_sigma_pdf(x, nmer, f, varargin)
 % This is licensed software; see notice at end of file. 
 %%
 parms=cell2mat(varargin);
-covar=parms(3)^2;
+covar=parms(2)^2;
 % constrain sum of amplitudes to be < 1:
 p0 = parms(1);
 ns = 0:nmer;
 ps = pdf('Binomial', ns, nmer, f);
 ps(1) = ps(1) + p0;
 ps = ps ./ sum(ps) ; % normalize amplitudes
-mus = parms(2) + ns .* parms(4);
+mus = ns .* parms(3);
 distn=gmdistribution(mus', covar, ps');
 y = pdf(distn,x);
 global parm_names
-parm_names= {'xp0'; 'mu0'; 'sigma'; 'spacing'};
+parm_names= {'xp0'; 'sigma'; 'spacing'};
 end
 %% notice
 % This is free software: you can redistribute it and/or modify it under the

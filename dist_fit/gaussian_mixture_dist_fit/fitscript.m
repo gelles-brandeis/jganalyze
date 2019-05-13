@@ -1,8 +1,8 @@
 % fitscript: Script to fit and plots pdfs for the specified function
-% For example of use, including what variables need to be fit before
+% For example of use, including what variables need to be specified before
 % running, see fitscript_example.m
 %% 
-% Copyright 2016 Jeff Gelles, Brandeis University 
+% Copyright 2016, 2019 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 
@@ -32,13 +32,15 @@ errorbar(bin_centers, y, se,'ob');
 y2 = func(bin_centers',phat);
 hold on
 plot(bin_centers,y2,'sr');
-xlabel('\itE\rm_{FRET}')
+xlabel('Fluorescence (AU)')
 ylabel('Prob. density')
 legend('Data \pm s.e.', 'Fit');
 hold off
 fig.Visible='on';
-title([dataset '_' func2str(func)], 'Interpreter', 'none')
-savefig(fig,[dataset '_' func2str(func)]);
+fname = erase(replaceBetween(func2str(func), '(', ')', ''), ...
+    [")", "(", " ", "@"]); % remove everything that's not the function name
+title([dataset '_' fname], 'Interpreter', 'none')
+savefig(fig,[dataset '_' fname]);
 
 % make parameters table
 value=phat';
@@ -46,6 +48,9 @@ lower_90pct_CI=pci(1,:)';
 upper_90pct_CI=pci(2,:)';
 fit_parameters = table(value,lower_90pct_CI,upper_90pct_CI,...
     'RowNames',parm_names)
+%% versions
+% 5/10/19 - updated to handle more complex anonymous function names
+% gracefully
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
