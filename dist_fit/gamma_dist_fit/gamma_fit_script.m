@@ -17,17 +17,17 @@ a_lower_90_ci = ci(1, 1);
 a_upper_90_ci = ci(2, 1);
 b_lower_90_ci = ci(1, 2);
 b_upper_90_ci = ci(2, 2);
-parm_names =  {'a_shape'; 'a_lower_90_ci'; 'a_upper_90_ci';...
-    'b_scale'; 'b_lower_90_ci'; 'b_upper_90_ci'};
-fit_parameters = table(a_shape, a_lower_90_ci, a_upper_90_ci,...
-    b_scale, b_lower_90_ci, b_upper_90_ci...
-    )
+% parm_names =  {'a_shape'; 'a_lower_90_ci'; 'a_upper_90_ci';...
+%     'b_scale'; 'b_lower_90_ci'; 'b_upper_90_ci'};
+% fit_parameters = table(a_shape, a_lower_90_ci, a_upper_90_ci,...
+%     b_scale, b_lower_90_ci, b_upper_90_ci...
+%     )
 %     'RowNames', parm_names)
 
 fig = figure();
 orient('portrait');
 %% plot parameter covariance
-subplot (3,2,3);
+subplot (3,2,5);
 plot (bootstat(:,1),bootstat(:,2),'.')
 title ('Fit parameter covariance');
 xlabel ('shape a');
@@ -83,5 +83,4 @@ legend ('fit','data');
 %% Annotate plot
 show_vars({'dataset', 'ndwells', 'model', 'a_shape', 'b_scale', 'a_lower_90_ci',...
     'a_upper_90_ci', 'b_lower_90_ci', 'b_upper_90_ci'}, [3, 2, 1]);
-
-savefig(fig,dataset);
+%savefig(dataset);
