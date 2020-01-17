@@ -2,7 +2,7 @@
 % For example of use, including what variables need to be specified before
 % running, see fitscript_example.m
 %% 
-% Copyright 2016, 2019 Jeff Gelles, Brandeis University 
+% Copyright 2016, 2019, 2020 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 
