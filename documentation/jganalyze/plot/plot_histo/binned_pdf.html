@@ -4,7 +4,7 @@
 <head>
   <title>Description of binned_pdf</title>
   <meta name="keywords" content="binned_pdf">
-  <meta name="description" content="constructs a binned pdf of vector x suitable for plotting">
+  <meta name="description" content="[bin_centers, y, bins, se] = binned_pdf(x, nbins)">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,16 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
-<div class="box"><strong>constructs a binned pdf of vector x suitable for plotting</strong></div>
+<div class="box"><strong>[bin_centers, y, bins, se] = binned_pdf(x, nbins)</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
 <div class="box"><strong>function [bin_centers, y, bins, se] = binned_pdf(x, nbins) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> constructs a binned pdf of vector x suitable for plotting
+<div class="fragment"><pre class="comment"> [bin_centers, y, bins, se] = binned_pdf(x, nbins)
+ constructs a binned pdf of vector x suitable for plotting
+
+ x must be a column vector
 
  if nbins is a scalar, program constructs nbins equally populated bins and
  returns bin edges vector bins (nbins + 1 long) and bin_centers (nbins
@@ -43,7 +46,7 @@
 
  typical usage of results: errorbar(bin_centers, y, se)
 %
- Copyright 2014, 2016 Jeff Gelles, Brandeis University.
+ Copyright 2014, 2016, 2018, 2019 Jeff Gelles, Brandeis University.
  This is licensed software; see notice at end of file. 
 %</pre></div>
 
@@ -60,6 +63,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 23-Aug-2017 12:39:58 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Tue 07-Apr-2020 17:04:56 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>
