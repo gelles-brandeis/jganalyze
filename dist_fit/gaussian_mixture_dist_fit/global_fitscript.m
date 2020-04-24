@@ -1,6 +1,6 @@
 % global_fitscript: Script to  globally fit and plot pdfs 
 % for the specified function under multiple experimental conditions
-% For example of use, including what variables need to be fit before
+% For example of use, including what variables need to be set before
 % running, see global_fitscript_example.m
 %
 % Inputs
