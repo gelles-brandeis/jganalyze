@@ -48,6 +48,7 @@ y = ones(length(fit_data), 1); % for data points not in any category, pdf = 1
 for i = 1:n_cdns
     amps = [parms(i); parms(n_cdns + i); 1 - parms(i) - parms(n_cdns + i)];
     if sum((amps < 0) + (amps > 1)) > 0
+        i
         parms
         amps
         error('Gaussian mixture model amplitude parameter out of range [0,1].')

@@ -10,7 +10,7 @@
 %   nboot - number of bootstrap samples
 
 %% 
-% Copyright 2016, 2018 Jeff Gelles, Brandeis University 
+% Copyright 2016, 2018, 2020 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 global parm_names
@@ -23,8 +23,8 @@ func2 = @(fit_data, varargin) func(fit_category, fit_data, nslice, varargin{:});
 % the other input vectors (i.e., init_parm, lbounds, and ubounds).
 fitfun = @(b) mle(b,'pdf',func2,'start', init_parm, 'alpha', 0.1,...
     'LowerBound', lbounds, 'UpperBound', ubounds, ...
-    'Options', statset('UseParallel', true, 'MaxIter', 25000, ...
-    'MaxFunEvals', 100000));
+    'Options', statset('UseParallel', true, 'MaxIter', 2500000, ...
+    'MaxFunEvals', 10000000));
 
 phat = fitfun(fit_data); % do the fit
 phatcell = num2cell(phat);
@@ -55,8 +55,9 @@ upper_90pct_CI=prctile(bootparm, 95);
 % make parameters table
 value=phat;
 fit_parameters = table(value', se', lower_90pct_CI', upper_90pct_CI',...
+    lbounds', ubounds', ...
     'RowNames', parm_names', 'VariableNames', {'Value', 'SE', ...
-    'Lower_90pct_CI', 'Upper_90pct_CI'})
+    'Lower_90pct_CI', 'Upper_90pct_CI', 'Lower_bound', 'Upper_bound'})
 
 % make one fit plot for each condition
 for i = 1:nslice
@@ -78,8 +79,11 @@ for i = 1:nslice
         'Interpreter', 'none')
     savefig(fig,[run '_' condition_names{i}]);
     
+    % call an additional plot function if requested
     plot_function();
 end
+%% versions
+% 4/2020 - added output of lower and upper bounds in parmeter table
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
