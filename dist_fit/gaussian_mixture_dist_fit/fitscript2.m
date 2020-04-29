@@ -55,7 +55,9 @@ value=phat';
 lower_90pct_CI=pci(1,:)';
 upper_90pct_CI=pci(2,:)';
 fit_parameters = table(value,lower_90pct_CI,upper_90pct_CI,...
-    'RowNames',parm_names)
+     lbounds', ubounds', ...
+    'RowNames', parm_names, 'VariableNames', {'Value', ...
+    'Lower_90pct_CI', 'Upper_90pct_CI', 'Lower_bound', 'Upper_bound'})
 %% versions
 % 3/27/20 - Made to work with column vector input
 %         - Fitscript2 uses Jacobian method (rather than bootstrap)
