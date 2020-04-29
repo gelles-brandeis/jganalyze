@@ -23,7 +23,7 @@ function y = nmer_gaussian_one_sigma_zeromu_pdf(x, nmer, f, varargin)
 %       spacing
 %
 %% 
-% Copyright 2019 Jeff Gelles, Brandeis University 
+% Copyright 2019, 2020 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 parms=cell2mat(varargin);
