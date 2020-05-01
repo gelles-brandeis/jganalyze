@@ -1,30 +1,57 @@
 % fitscript: Script to fit and plots pdfs for the specified function
 % For example of use, including what variables need to be specified before
 % running, see fitscript_example.m
+%
+% Inputs
+%   nbins -- number of bins in the histograms
+%   func - function handle to a functiona that calculates the pdf
+%   x - observations to be fit (a (n x 1) column vector)
+%   nboot - number of bootstrap samples
+%   init_parm, lbounds, ubounds - row vectors specifying parameter initial
+%       guesses, lower bounds, and upper bounds
+%   fit_opts (optional) -- statset() options for mle
+%   dataset, (optional) run -- strings to create graph titles and file
+%   names
+%
+%   The pdf function will define global parm_names, a cell array of the
+%   parameter names.
 %% 
 % Copyright 2016, 2019, 2020 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
-% Data vector x must be a ROW vector
-
 global parm_names
-[bin_centers, y, bins, se]=binned_pdf(x',nbins); % for plot
-
+[bin_centers, y, bins, se]=binned_pdf(x, nbins); % for plot
+if ~exist('fit_opts')
+    fit_opts = statset('UseParallel', true, 'MaxIter', 2000, ...
+    'MaxFunEvals', 10000);
+end
+fname = erase(replaceBetween(func2str(func), '(', ')', ''), ...
+    [")", "(", " ", "@"]); % remove everything that's not the function name
+if ~exist('run')
+    titlestring = [dataset '_' fname];
+else
+    titlestring = [dataset '_' fname '_' run];
+end
+    
 % note: the anonymous function below is required so that bootci
 % (below) only tries to bootstrap sample from x and not from
 % the other input vectors (i.e., init_parm, lbounds, and ubounds).
+
 fitfun = @(x) mle(x,'pdf',func,'start', init_parm, 'alpha', 0.1,...
     'LowerBound', lbounds, 'UpperBound', ubounds, ...
-    'Options', statset('UseParallel', true, 'MaxIter', 2000, ...
-    'MaxFunEvals', 10000));
+    'Options', fit_opts);
 
 phat = fitfun(x'); % do the fit
 init_parm = phat;
 
 % now bootstrap to get fit params confidence intervals
-[pci, bootstat] = bootci(nboot,{fitfun, x'},'alpha', 0.1,...
-    'Options', statset('UseParallel', true, 'MaxIter', 2000, ...
-    'MaxFunEvals', 10000)); 
+% Note: using type = norm because the default bca algorithm
+% implemented by the bootci function is excessively time-consuming for 
+% large datasets.
+% See https://www.mathworks.com/matlabcentral/answers/52011-why-is-bootci-not-terminating
+
+[pci, bootstat] = bootci(nboot,{fitfun, x'},'alpha', 0.1, 'type',...
+    'norm', 'Options', fit_opts); 
 
 % make the plot
 fig = figure();
@@ -38,10 +65,8 @@ ylabel('Prob. density')
 legend('Data \pm s.e.', 'Fit');
 hold off
 fig.Visible='on';
-fname = erase(replaceBetween(func2str(func), '(', ')', ''), ...
-    [")", "(", " ", "@"]); % remove everything that's not the function name
-title([dataset '_' fname], 'Interpreter', 'none')
-savefig(fig,[dataset '_' fname]);
+title(titlestring, 'Interpreter', 'none')
+savefig(fig,titlestring);
 
 % make parameters table
 value=phat';
@@ -55,6 +80,8 @@ fit_parameters = table(value,lower_90pct_CI,upper_90pct_CI,...
 % 5/10/19 - updated to handle more complex anonymous function names
 % gracefully
 % 3/27/20 added comment about requiring row vector
+% 5/1/20 cleaned up comments, switched booctci to type = norm, added
+% optional runname and fit_opts parameters
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software

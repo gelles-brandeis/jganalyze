@@ -4,16 +4,27 @@
 % running, see global_fitscript_example.m
 %
 % Inputs
-%   func - function handle
+%   nbins -- number of bins in the histograms
+%   func - function handle to a functiona that calculates the pdf
 %   fit_data - observation to be fit (a column vector)
 %   fit_category - categories of each observation (a column vector)
 %   nboot - number of bootstrap samples
+%   init_parm, lbounds, ubounds - row vectors specifying parameter initial
+%       guesses, lower bounds, and upper bounds
+%   fit_opts (optional) -- statset() options for mle
+%
+%   The pdf function will define global parm_names, a cell array of the
+%   parameter names.
 
 %% 
 % Copyright 2016, 2018, 2020 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 global parm_names
+if isempty(fit_opts)
+    fit_opts = statset('UseParallel', true, 'MaxIter', 2500000, ...
+    'MaxFunEvals', 10000000);
+end
 
 % this anonymous function is to get around the restriction that mle can 
 % take only 1-D data...
@@ -23,8 +34,7 @@ func2 = @(fit_data, varargin) func(fit_category, fit_data, nslice, varargin{:});
 % the other input vectors (i.e., init_parm, lbounds, and ubounds).
 fitfun = @(b) mle(b,'pdf',func2,'start', init_parm, 'alpha', 0.1,...
     'LowerBound', lbounds, 'UpperBound', ubounds, ...
-    'Options', statset('UseParallel', true, 'MaxIter', 2500000, ...
-    'MaxFunEvals', 10000000));
+    'Options', fit_opts);
 
 phat = fitfun(fit_data); % do the fit
 phatcell = num2cell(phat);
