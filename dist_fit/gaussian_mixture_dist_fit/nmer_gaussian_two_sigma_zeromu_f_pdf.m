@@ -4,7 +4,9 @@ function y = nmer_gaussian_two_sigma_zeromu_f_pdf(x, nmer, varargin)
 % with one or zero dyes per protomer.  This version of the function (with
 % "zeromu" and "f" in the name) assumes that the first Gaussian component is
 % centered at zero intensity (i.e., it is for background-subtracteed
-% data)and has the mean fraction labeled per site, f, as a variable parameter. 
+% data)and has the mean fraction labeled per site, f, as a variable parameter.
+% In this version we allow the width of the no-dye peak to be different
+% from that of the other peaks.
 %
 % Requires statistics toolbox
 %
