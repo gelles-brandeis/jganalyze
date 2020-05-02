@@ -45,13 +45,13 @@ phat = fitfun(x'); % do the fit
 init_parm = phat;
 
 % now bootstrap to get fit params confidence intervals
-% Note: using type = norm because the default bca algorithm
+% Note: using type = per because the default bca algorithm
 % implemented by the bootci function is excessively time-consuming for 
 % large datasets.
 % See https://www.mathworks.com/matlabcentral/answers/52011-why-is-bootci-not-terminating
 
 [pci, bootstat] = bootci(nboot,{fitfun, x'},'alpha', 0.1, 'type',...
-    'norm', 'Options', fit_opts); 
+    'per', 'Options', fit_opts); 
 
 % make the plot
 fig = figure();
