@@ -2,8 +2,8 @@
                 "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-  <title>Description of nmer_gaussian_one_sigma_pdf</title>
-  <meta name="keywords" content="nmer_gaussian_one_sigma_pdf">
+  <title>Description of nmer_gaussian_shot_sigma_zeromu_f_pdf</title>
+  <meta name="keywords" content="nmer_gaussian_shot_sigma_zeromu_f_pdf">
   <meta name="description" content="pdf values for a (nmer+1)-component Gaussian mixture model for fitting">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
@@ -12,45 +12,49 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../../index.html">Home</a> &gt;  <a href="../../index.html">jganalyze</a> &gt; <a href="#">dist_fit</a> &gt; <a href="index.html">gaussian_mixture_dist_fit</a> &gt; nmer_gaussian_one_sigma_pdf.m</div>
+<div><a href="../../../index.html">Home</a> &gt;  <a href="../../index.html">jganalyze</a> &gt; <a href="#">dist_fit</a> &gt; <a href="index.html">gaussian_mixture_dist_fit</a> &gt; nmer_gaussian_shot_sigma_zeromu_f_pdf.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../../index.html"><img alt="<" border="0" src="../../../left.png">&nbsp;Master index</a></td>
 <td align="right"><a href="index.html">Index for jganalyze\dist_fit\gaussian_mixture_dist_fit&nbsp;<img alt=">" border="0" src="../../../right.png"></a></td></tr></table>-->
 
-<h1>nmer_gaussian_one_sigma_pdf
+<h1>nmer_gaussian_shot_sigma_zeromu_f_pdf
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
 <div class="box"><strong>pdf values for a (nmer+1)-component Gaussian mixture model for fitting</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
-<div class="box"><strong>function y = nmer_gaussian_one_sigma_pdf(x, nmer, f, varargin) </strong></div>
+<div class="box"><strong>function y = nmer_gaussian_shot_sigma_zeromu_f_pdf(x, nmer, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> pdf values for a (nmer+1)-component Gaussian mixture model for fitting
  intensity distributions from SMF data on a randomly labeled homomultimer
- with one or zero dyes per protomer
-
- See nmer_gaussian_example.mlx for usage
+ with one or zero dyes per protomer.  This version of the function (with
+ &quot;zeromu&quot; and &quot;f&quot; in the name) assumes that the first Gaussian component is
+ centered at zero intensity (i.e., it is for background-subtracteed
+ data)and has the mean fraction labeled per site, f, as a variable parameter.
+ In this version we allow the width of each peak to vary according to a
+ a fixed (readout) plus variable (shot) noise model.
 
  Requires statistics toolbox
 
- y = y = nmer_gaussian_one_sigma_pdf(x, varargin)
+ y = nmer_gaussian_shot_sigma_zeromu_f_pdf(x, nmer, parms)
 
  y - probability densities
  x - input data
  nmer -- multimer size (i.e., nmer = 6 for a hexamer)
- f -- labeling probability for a protomer
- parms - [xp0 mu0 sigma spacing] 
-   xp0 -- additional amplitude of zero peak: binomial amplitudes should be 
+ parms - [xp0 k spacing f fixedsigma g] 
+   1) xp0 -- additional amplitude of zero peak: binomial amplitudes should be 
        divided by (xp0 + 1)
-   mu0 -- position of zero peak
-   sigma -- width of all peaks
-   spacing -- spacing of peaks; peak 1 thru nmer are at mu0 + nmer *
+   2) k -- shot noise proportionality constant (see writeup)
+   3) spacing -- spacing of peaks; peak 1 thru nmer are at mu0 + nmer *
        spacing
+   4) f -- labeling probability for a protomer
+   5) fixedsigma -- fixed component of noise (e.g., readout noise)
+   6) g -- offset to true zero of intensity (see writeup)
 
 % 
- Copyright 2019 Jeff Gelles, Brandeis University 
+ Copyright 2019, 2020 Jeff Gelles, Brandeis University 
  This is licensed software; see notice at end of file. 
 %</pre></div>
 
