@@ -1,8 +1,8 @@
 % Use m2html to create documentation for jganalyze
 
-% m2html is at http://www.artefact.tk/software/matlab/m2html/
+% The current version of m2html is at https://github.com/gllmflndn/m2html
 % this script assumes m2html is installed at:
-addpath('C:\Users\gelles\Documents\Box Sync\JGDocs\Computation\MATLAB\m2html')
+addpath('C:\Users\gelles\Documents\GitHub\m2html')
 cd ('C:\Users\gelles\Documents\GitHub')
 warning('off')
 m2html('mfiles','jganalyze', 'htmldir','jganalyze/documentation', ...
