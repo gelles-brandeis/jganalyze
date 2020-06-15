@@ -1,4 +1,4 @@
-function [f, intgl, x1s, x2s] = kernel_hist_2d(x,gridx1,gridx2,bw, cellarea)
+function [f, intgl, x1s, x2s] = kernel_hist_2d(x, gridx1, gridx2, bw, cellarea)
 % KSDENSITY2D Compute kernel density estimate in 2D.
 % F = KSDENSITY2D(X,GRIDX,GRIDX2,BW) computes a nonparametric estimate of
 % the probability density function of the sample in the N-by-2 matrix X.
