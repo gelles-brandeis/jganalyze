@@ -52,13 +52,12 @@ y = ones(length(fit_data), 1); % for data points not in any category, pdf = 1
 for i = 1:n_cdns
     amps = [parms(i); parms(n_cdns + i); 1 - parms(i) - parms(n_cdns + i)]; % amps constrained to sum to 1
     index = (fit_category == i);
-    distn = makedist('Normal', 'mu', mu1, 'sigma' sig);
-    y1(index) = amps(1) .* pdf(distn, fit_data(index));
-    distn = makedist('Normal', 'mu', mu2, 'sigma' sig);
-    y2(index) = amps(2) .* pdf(distn, fit_data(index));
-    distn = makedist('Normal', 'mu', mu3, 'sigma' sig;
-    y3(index) = amps(3) .* pdf(distn, fit_data(index));
-    y(index) = y1 + y2 + y3;
+    distn1 = makedist('Normal', 'mu', mu1, 'sigma', sig);
+    distn2 = makedist('Normal', 'mu', mu2, 'sigma', sig);
+    distn3 = makedist('Normal', 'mu', mu3, 'sigma', sig);
+    y(index) = amps(1) .* pdf(distn1, fit_data(index)) + ...
+               amps(2) .* pdf(distn2, fit_data(index)) + ...
+               amps(3) .* pdf(distn3, fit_data(index));
     parm_names{i} = ['p1_' condition_names{i}];
     parm_names{i + n_cdns} = ['p2_' condition_names{i}];
 end
