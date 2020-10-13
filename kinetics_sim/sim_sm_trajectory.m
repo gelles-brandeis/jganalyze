@@ -9,7 +9,7 @@ function traj = sim_sm_trajectory(model, max_length)
 %       s-1 or min-1 for conversion of state i ==> state j.  All diagonal
 %       elements should be zero for a Markov process.  If model.k(i,:) is
 %       all zeros, that defines state i as a dead end meaning that entry
-%       into state i temrinates the trajectory.
+%       into state i terminates the trajectory.
 %   model.start_prob: column vector; model.start_prob(i) is the probability
 %       that a trajectory will start in state i. Elements must be
 %       non-negative and sum to 1.
@@ -27,7 +27,7 @@ function traj = sim_sm_trajectory(model, max_length)
 %       .time: cumulative time till the end of state.
 
 %%
-% Copyright 2016 Jeff Gelles, Brandeis University.
+% Copyright 2016,2020 Jeff Gelles, Brandeis University.
 % This is licensed software; see notice at end of file. 
 
 %% 
@@ -52,7 +52,7 @@ end
 % terms of the GNU General Public License as published by the Free Software
 % Foundation, either version 3 of the License, or (at your option) any later
 % version.
-
+%
 % This software is distributed in the hope that it will be useful, but WITHOUT ANY
 % WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 % A PARTICULAR PURPOSE. See the GNU General Public License for more details.
