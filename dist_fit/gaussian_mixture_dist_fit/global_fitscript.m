@@ -46,7 +46,7 @@ init_parm = phat;
 % separately
 bootparm = zeros(nboot,length(phat));
 h=waitbar(0, 'Bootstrapping...');
-for j = 1:nboot
+parfor j = 1:nboot
     samp_fit_data = zeros(length(fit_data),1);
     for i = 1:nslice
         index = fit_category == i;
