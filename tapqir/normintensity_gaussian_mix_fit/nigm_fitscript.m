@@ -5,8 +5,9 @@
 %
 % Inputs
 %   nbins -- number of bins in the histograms
-%   func - function handle to a functiona that calculates the pdf
-%   x - observations to be fit (a (n x 1) column vector)
+%   func - function handle to a function that calculates the pdf
+%   x - observations to be fit (an (n x 2) column vector: col 1 is height
+%       col 2 is background)
 %   nboot - number of bootstrap samples
 %   init_parm, lbounds, ubounds - row vectors specifying parameter initial
 %       guesses, lower bounds, and upper bounds
@@ -17,10 +18,11 @@
 %   The pdf function will define global parm_names, a cell array of the
 %   parameter names.
 %% 
-% Copyright 2016, 2019, 2020 Jeff Gelles, Brandeis University 
+% Copyright 2016, 2019, 2020, 2022 Jeff Gelles, Brandeis University 
 % This is licensed software; see notice at end of file. 
 %%
 global parm_names
+norm_intensity = x(:,1) ./ x(:,2);
 [bin_centers, y, bins, se]=binned_pdf(x, nbins); % for plot
 if ~exist('fit_opts')
     fit_opts = statset('UseParallel', true, 'MaxIter', 2000, ...
@@ -43,6 +45,7 @@ fitfun = @(x) mle(x,'pdf',func,'start', init_parm, 'alpha', 0.1,...
     'Options', fit_opts);
 
 phat = fitfun(x'); % do the fit
+
 init_parm = phat;
 
 % now bootstrap to get fit params confidence intervals
@@ -61,7 +64,7 @@ errorbar(bin_centers, y, se,'ob');
 y2 = func(bin_centers',phat);
 hold on
 plot(bin_centers,y2,'sr');
-xlabel('Fluorescence (AU)')
+xlabel('Normalized fluorescence (AU)')
 ylabel('Prob. density')
 legend('Data \pm s.e.', 'Fit');
 hold off
