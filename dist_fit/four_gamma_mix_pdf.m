@@ -20,13 +20,13 @@ ps = [1 - abs(parms(3) + parms(4) + parms(5)); parms(3); parms(4); parms(5)];
 mus = 1:comp;
 mus = mus .* parms(1);
 w = parms(2);
-distn = cell(comp, 1);
+distn = cell(comp, 1); % initialize to empty cell array
 component_pdfs = zeros(comp, length(x));
 for i = 1:comp
     distn{i} = makedist('Gamma','a', mus(i) .* w, "b", 1 / w);
     component_pdfs(i, :) = pdf(distn{i}, x);
 end
-y = sum(ps .* component_pdfs);
+y = (sum(ps .* component_pdfs))';
 global parm_names
 parm_names = {'mu'; 'w'; 'p2'; 'p3'; 'p4'};
 end
