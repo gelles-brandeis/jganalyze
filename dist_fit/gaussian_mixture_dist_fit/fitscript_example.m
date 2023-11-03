@@ -10,3 +10,4 @@ lbounds = [0, 0, 0, -1]; % constrain lower bounds of parameters
 ubounds = [1, 1, 1, 1]; % constrain upper bounds of parameters
 init_parm = [0.97, 0.2, 0.06, -.05]; % initial param guesses
 fitscript2;
+two_gaussian_one_sigma_compplot;
