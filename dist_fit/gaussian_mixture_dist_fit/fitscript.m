@@ -60,8 +60,8 @@ errorbar(bin_centers, y, se,'ob');
 y2 = func(bin_centers',phat);
 hold on
 plot(bin_centers,y2,'sr');
-xlabel('Fluorescence (AU)')
-ylabel('Prob. density')
+xlabel(x_label);
+ylabel(y_label);
 legend('Data \pm s.e.', 'Fit');
 hold off
 fig.Visible='on';
@@ -82,6 +82,7 @@ fit_parameters = table(value,lower_90pct_CI,upper_90pct_CI,...
 % 3/27/20 added comment about requiring row vector
 % 5/1/20 cleaned up comments, switched booctci to type = norm, added
 % optional runname and fit_opts parameters
+% added variable graph x and y labels
 %% notice
 % This is free software: you can redistribute it and/or modify it under the
 % terms of the GNU General Public License as published by the Free Software
